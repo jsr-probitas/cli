@@ -11,17 +11,28 @@ Command-line interface for
 
 ## Installation
 
-#### Using Deno
+### Quick Install
+
+Requires [Deno](https://deno.land/) v2.x or later.
 
 ```bash
-deno install -grAf -n probitas jsr:@probitas/cli
+curl -fsSL https://jsr.io/@probitas/cli/install.sh | sh
 ```
 
-- `-g` Global install
-- `-r` Reload cache (fetch latest version)
-- `-A` All permissions
-- `-f` Force overwrite existing
-- `-n probitas` Command name
+**Environment variables:**
+
+| Variable               | Description            | Default       |
+| ---------------------- | ---------------------- | ------------- |
+| `PROBITAS_VERSION`     | Version to install     | latest        |
+| `PROBITAS_INSTALL_DIR` | Installation directory | `~/.deno/bin` |
+
+```bash
+# Install specific version
+curl -fsSL https://jsr.io/@probitas/cli/install.sh | PROBITAS_VERSION=0.1.0 sh
+
+# Install to custom directory
+curl -fsSL https://jsr.io/@probitas/cli/install.sh | PROBITAS_INSTALL_DIR=/usr/local sh
+```
 
 ### Using Nix
 
