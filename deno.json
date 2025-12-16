@@ -9,6 +9,7 @@
       "assets/**/*",
       "deno.json",
       "deno.lock",
+      "install.sh",
       "mod.ts",
       "src/**/*.ts"
     ]

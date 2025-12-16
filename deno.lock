@@ -13,6 +13,7 @@
     "jsr:@logtape/logtape@^1.3.1": "1.3.1",
     "jsr:@logtape/pretty@^1.2.2": "1.3.1",
     "jsr:@probitas/builder@0.3": "0.3.0",
+    "jsr:@probitas/cli@0.7.2": "0.7.2",
     "jsr:@probitas/client-connectrpc@0": "0.4.0",
     "jsr:@probitas/client-deno-kv@0": "0.3.0",
     "jsr:@probitas/client-graphql@0": "0.3.0",
@@ -127,6 +128,24 @@
       "integrity": "c4be50d1f3123a4b8ac27c860a4eb386481d289b7c043998ca90267712d7e7b6",
       "dependencies": [
         "jsr:@probitas/core@0.1"
+      ]
+    },
+    "@probitas/cli@0.7.2": {
+      "integrity": "68d1264c340c8ec7f68a76eef079ea3a4c2963880031f15effc17f79fbbb48e6",
+      "dependencies": [
+        "jsr:@core/errorutil",
+        "jsr:@core/unknownutil@^4.3.0",
+        "jsr:@probitas/core@0",
+        "jsr:@probitas/discover",
+        "jsr:@probitas/logger@0",
+        "jsr:@probitas/probitas",
+        "jsr:@probitas/reporter",
+        "jsr:@probitas/runner@0",
+        "jsr:@std/cli",
+        "jsr:@std/collections",
+        "jsr:@std/fs@^1.0.20",
+        "jsr:@std/jsonc",
+        "jsr:@std/path@^1.1.3"
       ]
     },
     "@probitas/client@0.3.0": {
