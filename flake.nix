@@ -16,6 +16,7 @@
           text = ''
             export DENO_NO_UPDATE_CHECK=1
             exec deno run -A \
+              --unstable-kv \
               --config=${self}/deno.json \
               --lock=${self}/deno.lock \
               ${self}/mod.ts "$@"
