@@ -5,7 +5,6 @@
  */
 
 import { as, ensure, is, type Predicate } from "@core/unknownutil";
-import { resolve } from "@std/path/resolve";
 import { getLogger } from "@probitas/logger";
 import { JSONReporter, ListReporter } from "@probitas/reporter";
 import type { Reporter } from "@probitas/runner";
@@ -157,8 +156,9 @@ export function parseTimeout(
  * @returns Asset content
  */
 export async function readAsset(path: string): Promise<string> {
-  const assetPath = resolve(`${import.meta.dirname}/../assets/${path}`);
-  return await Deno.readTextFile(assetPath);
+  const url = new URL(`../assets/${path}`, import.meta.url);
+  const resp = await fetch(url);
+  return await resp.text();
 }
 
 /**
@@ -171,8 +171,9 @@ export async function readAsset(path: string): Promise<string> {
  */
 export async function getVersion(): Promise<string | undefined> {
   try {
-    const denoJsonPath = resolve(`${import.meta.dirname}/../deno.json`);
-    const content = await Deno.readTextFile(denoJsonPath);
+    const url = new URL("../deno.json", import.meta.url);
+    const resp = await fetch(url);
+    const content = await resp.text();
     const denoJson = ensure(JSON.parse(content), isDenoJson);
     return denoJson.version;
   } catch (err: unknown) {
