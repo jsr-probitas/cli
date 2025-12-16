@@ -149,27 +149,30 @@ export function parseTimeout(
 /**
  * Read asset file from assets directory
  *
+ * Uses import.meta.dirname for compatibility with deno compile.
+ * The --include flag must be used when compiling to embed assets.
+ *
  * @param path - Asset path relative to assets/ (e.g., "usage.txt", "templates/deno.json")
  * @returns Asset content
  */
 export async function readAsset(path: string): Promise<string> {
-  const assetPath = new URL(
-    `./assets/${path}`,
-    import.meta.url,
-  );
-  const resp = await fetch(assetPath);
-  return await resp.text();
+  const assetPath = `${import.meta.dirname}/assets/${path}`;
+  return await Deno.readTextFile(assetPath);
 }
 
 /**
- * Get version from import.meta.url
+ * Get version from deno.json
  *
- * @returns Version string, or undefined if not running from JSR
+ * Uses import.meta.dirname for compatibility with deno compile.
+ * The --include flag must be used when compiling to embed deno.json.
+ *
+ * @returns Version string, or undefined if not available
  */
 export async function getVersion(): Promise<string | undefined> {
   try {
-    const resp = await fetch(new URL("./deno.json", import.meta.url));
-    const denoJson = ensure(await resp.json(), isDenoJson);
+    const denoJsonPath = `${import.meta.dirname}/deno.json`;
+    const content = await Deno.readTextFile(denoJsonPath);
+    const denoJson = ensure(JSON.parse(content), isDenoJson);
     return denoJson.version;
   } catch (err: unknown) {
     logger.debug("Failed to read version from deno.json", {

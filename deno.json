@@ -4,7 +4,9 @@
     "check": "deno check ./**/*.ts",
     "test": "deno test -A --parallel --shuffle",
     "verify": "deno fmt && deno lint && deno task check && deno task test",
-    "probitas": "deno run -A --unstable-kv ./mod.ts"
+    "probitas": "deno run -A --unstable-kv --lock ./deno.lock ./mod.ts",
+    "compile": "deno run -A .scripts/compile.ts",
+    "update-version": "deno run -A .scripts/update_version.ts"
   },
   "imports": {
     "@core/errorutil": "jsr:@core/errorutil@^1.2.1",

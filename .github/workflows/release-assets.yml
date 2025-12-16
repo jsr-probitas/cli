@@ -62,13 +62,7 @@ jobs:
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Update deno.json version
-        run: |
-          deno eval "
-            const path = './deno.json';
-            const config = JSON.parse(Deno.readTextFileSync(path));
-            config.version = '${{ steps.version.outputs.version }}';
-            Deno.writeTextFileSync(path, JSON.stringify(config, null, 2) + '\n');
-          "
+        run: deno task update-version ${{ steps.version.outputs.version }}
 
       - name: Set archive name
         id: archive
@@ -76,20 +70,7 @@ jobs:
           echo "name=probitas-${{ steps.version.outputs.version }}-${{ matrix.platform }}.${{ matrix.archive }}" >> "$GITHUB_OUTPUT"
 
       - name: Compile binary
-        shell: bash
-        run: |
-          mkdir -p dist
-          if [[ "${{ matrix.archive }}" == "zip" ]]; then
-            OUTPUT="dist/probitas.exe"
-          else
-            OUTPUT="dist/probitas"
-          fi
-          deno compile \
-            --allow-all \
-            --unstable-kv \
-            --target ${{ matrix.target }} \
-            --output "$OUTPUT" \
-            ./mod.ts
+        run: deno task compile -- --target ${{ matrix.target }}
 
       - name: Prepare distribution files
         run: |
