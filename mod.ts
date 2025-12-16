@@ -118,7 +118,7 @@
 
 // CLI entry point when run directly
 if (import.meta.main) {
-  const { main } = await import("./main.ts");
+  const { main } = await import("./src/main.ts");
   const exitCode = await main(Deno.args);
   Deno.exit(exitCode);
 }
