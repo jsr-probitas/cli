@@ -1,7 +1,8 @@
 # Probitas CLI
 
+[![JSR](https://jsr.io/badges/@probitas/cli)](https://jsr.io/@probitas/cli)
 [![Test](https://github.com/jsr-probitas/cli/actions/workflows/test.yml/badge.svg)](https://github.com/jsr-probitas/cli/actions/workflows/test.yml)
-[![Release Assets](https://github.com/jsr-probitas/cli/actions/workflows/release-assets.yml/badge.svg)](https://github.com/jsr-probitas/cli/actions/workflows/release-assets.yml)
+[![Publish](https://github.com/jsr-probitas/cli/actions/workflows/publish.yml/badge.svg)](https://github.com/jsr-probitas/cli/actions/workflows/publish.yml)
 [![codecov](https://codecov.io/gh/jsr-probitas/cli/graph/badge.svg)](https://codecov.io/gh/jsr-probitas/cli)
 
 Command-line interface for
@@ -10,21 +11,17 @@ Command-line interface for
 
 ## Installation
 
-### Using install script
+#### Using Deno
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/jsr-probitas/cli/main/install.sh | bash
+deno install -grAf -n probitas jsr:@probitas/cli
 ```
 
-Options via environment variables:
-
-```bash
-# Install specific version
-curl -fsSL https://raw.githubusercontent.com/jsr-probitas/cli/main/install.sh | PROBITAS_VERSION=0.7.1 bash
-
-# Install to custom directory
-curl -fsSL https://raw.githubusercontent.com/jsr-probitas/cli/main/install.sh | PROBITAS_INSTALL_DIR=/usr/local/bin bash
-```
+- `-g` Global install
+- `-r` Reload cache (fetch latest version)
+- `-A` All permissions
+- `-f` Force overwrite existing
+- `-n probitas` Command name
 
 ### Using Nix
 
