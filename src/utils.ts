@@ -50,10 +50,6 @@ export function resolveReporter(
 
   const fn = reporterMap[reporter];
   if (!fn) {
-    logger.error("Unknown reporter", {
-      reporter,
-      availableReporters: Object.keys(reporterMap),
-    });
     throw new Error(`Unknown reporter: ${reporter}`);
   }
 

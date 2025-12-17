@@ -141,7 +141,7 @@ export async function runCommand(
     );
 
     if (scenarioFiles.length === 0) {
-      logger.error("No scenario files found", { paths, includes, excludes });
+      console.warn("No scenario files found");
       return EXIT_CODE.NOT_FOUND;
     }
 
@@ -161,7 +161,7 @@ export async function runCommand(
     logger.debug("Scenarios loaded", { scenarioCount: scenarios.length });
 
     if (scenarios.length === 0) {
-      logger.error("No scenarios found in files");
+      console.warn("No scenarios found in files");
       return EXIT_CODE.NOT_FOUND;
     }
 
@@ -173,7 +173,7 @@ export async function runCommand(
     }
 
     if (scenarios.length === 0) {
-      logger.error("No scenarios matched the filter", { selectors });
+      console.warn("No scenarios matched the filter");
       return EXIT_CODE.NOT_FOUND;
     }
 

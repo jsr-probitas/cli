@@ -68,8 +68,8 @@ export async function main(args: string[]): Promise<number> {
       return await listCommand(commandArgs, cwd);
 
     default:
-      logger.error("Unknown command", { command });
-      logger.error("Run 'probitas --help' for usage information");
+      console.warn(`Unknown command: ${command}`);
+      console.warn("Run 'probitas --help' for usage information");
       return EXIT_CODE.USAGE_ERROR;
   }
 }
