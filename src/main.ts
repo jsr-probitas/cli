@@ -7,6 +7,7 @@
 import { parseArgs } from "@std/cli";
 import { getLogger } from "@probitas/logger";
 import { EXIT_CODE } from "./constants.ts";
+import { initCommand } from "./commands/init.ts";
 import { listCommand } from "./commands/list.ts";
 import { runCommand } from "./commands/run.ts";
 import { getVersion, readAsset } from "./utils.ts";
@@ -61,6 +62,9 @@ export async function main(args: string[]): Promise<number> {
 
   // Dispatch to command handler
   switch (command) {
+    case "init":
+      return await initCommand(commandArgs, cwd);
+
     case "run":
       return await runCommand(commandArgs, cwd);
 

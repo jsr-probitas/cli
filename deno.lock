@@ -7,6 +7,7 @@
     "jsr:@cspotcode/outdent@0.8": "0.8.0",
     "jsr:@db/sqlite@0.12": "0.12.0",
     "jsr:@denosaurs/plug@1": "1.1.0",
+    "jsr:@lambdalisue/sandbox@^3.0.1": "3.0.1",
     "jsr:@logtape/logtape@^1.2.2": "1.3.1",
     "jsr:@logtape/logtape@^1.3.1": "1.3.1",
     "jsr:@logtape/pretty@^1.2.2": "1.3.1",
@@ -40,6 +41,7 @@
     "jsr:@std/assert@0.217": "0.217.0",
     "jsr:@std/assert@^1.0.14": "1.0.16",
     "jsr:@std/assert@^1.0.15": "1.0.16",
+    "jsr:@std/assert@^1.0.16": "1.0.16",
     "jsr:@std/async@^1.0.15": "1.0.15",
     "jsr:@std/cli@^1.0.24": "1.0.24",
     "jsr:@std/collections@^1.1.3": "1.1.3",
@@ -65,6 +67,7 @@
     "npm:@duckdb/node-api@1.4.2-r.1": "1.4.2-r.1",
     "npm:@faker-js/faker@9": "9.9.0",
     "npm:@lambdalisue/connectrpc-grpcreflect@0.5": "0.5.0_@bufbuild+protobuf@2.10.2",
+    "npm:@types/node@24.0.7": "24.0.7",
     "npm:amqplib@~0.10.5": "0.10.9",
     "npm:diff@^8.0.2": "8.0.2",
     "npm:ioredis@^5.4.1": "5.8.2",
@@ -101,13 +104,20 @@
         "jsr:@std/path@1"
       ]
     },
+    "@lambdalisue/sandbox@3.0.1": {
+      "integrity": "0735e8b101daccf673543d2cd77074900fcc5f63eb2306f52ca09539463bcac8",
+      "dependencies": [
+        "jsr:@std/path@1"
+      ]
+    },
     "@logtape/logtape@1.3.1": {
       "integrity": "f9284514f1c2259756511fb88f52bc166aa330f3f00a5d3628f0a3c379cd9bf1"
     },
     "@logtape/pretty@1.3.1": {
       "integrity": "f85aa3088834faec39433dd26eb5381a72137a0a9c9813033af40dce1d2e4319",
       "dependencies": [
-        "jsr:@logtape/logtape@^1.3.1"
+        "jsr:@logtape/logtape@^1.3.1",
+        "npm:@types/node"
       ]
     },
     "@probitas/builder@0.3.2": {
@@ -248,6 +258,16 @@
       "integrity": "34cc2ad54c9bb85c40ae451e52e0739321406c3425ea827e5acaf6417e0081e4",
       "dependencies": [
         "jsr:@core/errorutil",
+        "jsr:@probitas/client-connectrpc",
+        "jsr:@probitas/client-deno-kv",
+        "jsr:@probitas/client-graphql",
+        "jsr:@probitas/client-grpc",
+        "jsr:@probitas/client-http",
+        "jsr:@probitas/client-mongodb",
+        "jsr:@probitas/client-rabbitmq",
+        "jsr:@probitas/client-redis",
+        "jsr:@probitas/client-sql",
+        "jsr:@probitas/client-sqs",
         "jsr:@probitas/core@~0.1.2",
         "jsr:@std/expect",
         "npm:diff"
@@ -291,12 +311,14 @@
       "dependencies": [
         "jsr:@probitas/core@~0.1.2",
         "jsr:@probitas/expect",
-        "jsr:@probitas/logger@~0.2.12"
+        "jsr:@probitas/logger@~0.2.12",
+        "jsr:@probitas/runner@~0.3.3"
       ]
     },
     "@probitas/runner@0.3.3": {
       "integrity": "e851a42a17b4eb22fbe593d3a513fdcd8c1439ab3aa48417456e294966272ad9",
       "dependencies": [
+        "jsr:@probitas/core@~0.1.2",
         "jsr:@std/async",
         "jsr:@std/collections"
       ]
@@ -373,7 +395,8 @@
       "integrity": "a917ffdeb5924c9be436dc78bc32e511760e14d3a96e49c607fc5ecca86d0092",
       "dependencies": [
         "jsr:@std/assert@^1.0.15",
-        "jsr:@std/data-structures"
+        "jsr:@std/data-structures",
+        "jsr:@std/internal@^1.0.12"
       ]
     }
   },
@@ -1241,6 +1264,12 @@
         "tslib"
       ]
     },
+    "@types/node@24.0.7": {
+      "integrity": "sha512-YIEUUr4yf8q8oQoXPpSlnvKNVKDQlPMWrmOcgzoduo7kvA2UF0/BwJ/eMKFTiTtkNL17I0M6Xe2tvwFU7be6iw==",
+      "dependencies": [
+        "undici-types"
+      ]
+    },
     "@types/webidl-conversions@7.0.3": {
       "integrity": "sha512-CiJJvcRtIgzadHCYXw7dqEnMNRjhGZlYK05Mj9OyktqV8uVT8fD2BFOB7S1uwBE3Kj2Z+4UyPmFw/Ixgw/LAlA=="
     },
@@ -1423,6 +1452,9 @@
     },
     "tslib@2.8.1": {
       "integrity": "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="
+    },
+    "undici-types@7.8.0": {
+      "integrity": "sha512-9UJ2xGDvQ43tYyVMpuHlsgApydB8ZKfVYTsLDhXkFL/6gfkp+U8xTGdh8pMJv1SpZna0zxG1DwsKZsreLbXBxw=="
     },
     "url-parse@1.5.10": {
       "integrity": "sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==",
