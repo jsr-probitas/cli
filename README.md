@@ -109,6 +109,35 @@ List discovered scenarios without running them.
 - `--select, -s <pattern>` - Filter scenarios by selector
 - `--json` - Output as JSON
 
+### `probitas init [options]`
+
+Initialize a new Probitas project with example files.
+
+**Options:**
+
+- `--directory, -d <dir>` - Directory name to create (default: "probitas")
+- `--force, -f` - Overwrite existing files
+- `--verbose, -v` - Enable verbose output
+- `--quiet, -q` - Suppress non-error output
+
+**Examples:**
+
+```bash
+# Create probitas/ directory with example files
+probitas init
+
+# Create custom directory name
+probitas init -d scenarios
+
+# Overwrite existing files
+probitas init --force
+```
+
+**Created files:**
+
+- `example.probitas.ts` - Example scenario file
+- `probitas.jsonc` - Configuration file
+
 ## Selectors
 
 Selectors filter scenarios by name or tags:
