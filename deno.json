@@ -35,7 +35,7 @@
     "@cspotcode/outdent": "jsr:@cspotcode/outdent@^0.8.0",
     "@lambdalisue/sandbox": "jsr:@lambdalisue/sandbox@^3.0.1",
     "@probitas/core": "jsr:@probitas/core@^0.2.0",
-    "@probitas/discover": "jsr:@probitas/discover@^0.3.0",
+    "@probitas/discover": "jsr:@probitas/discover@^0.3.1",
     "@probitas/logger": "jsr:@probitas/logger@^0.3.0",
     "@probitas/reporter": "jsr:@probitas/reporter@^0.6.0",
     "@probitas/runner": "jsr:@probitas/runner@^0.4.0",

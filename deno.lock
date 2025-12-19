@@ -38,7 +38,7 @@
     "jsr:@probitas/client-sqs@~0.4.1": "0.4.1",
     "jsr:@probitas/client@0": "0.4.1",
     "jsr:@probitas/core@0.2": "0.2.0",
-    "jsr:@probitas/discover@0.3": "0.3.0",
+    "jsr:@probitas/discover@~0.3.1": "0.3.1",
     "jsr:@probitas/expect@0.3": "0.3.0",
     "jsr:@probitas/logger@0.3": "0.3.0",
     "jsr:@probitas/probitas@*": "0.6.0",
@@ -263,11 +263,12 @@
         "jsr:@std/path@^1.1.3"
       ]
     },
-    "@probitas/discover@0.3.0": {
-      "integrity": "422a759a12f751ae5e02bcab1be892dbe0177df5128f371c67dfa4b1d7f962bb",
+    "@probitas/discover@0.3.1": {
+      "integrity": "2b06be7a221bf12b044879926bec4a1964cb6b1e0f8fa71f8a7421050087955c",
       "dependencies": [
         "jsr:@probitas/logger",
-        "jsr:@std/fs@^1.0.20"
+        "jsr:@std/fs@^1.0.20",
+        "jsr:@std/path@^1.1.3"
       ]
     },
     "@probitas/expect@0.3.0": {
@@ -1500,7 +1501,7 @@
       "jsr:@cspotcode/outdent@0.8",
       "jsr:@lambdalisue/sandbox@^3.0.1",
       "jsr:@probitas/core@0.2",
-      "jsr:@probitas/discover@0.3",
+      "jsr:@probitas/discover@~0.3.1",
       "jsr:@probitas/logger@0.3",
       "jsr:@probitas/reporter@0.6",
       "jsr:@probitas/runner@0.4",

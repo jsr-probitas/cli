@@ -26,6 +26,7 @@ import {
   readAsset,
   resolveReporter,
 } from "../utils.ts";
+import { createDiscoveryProgress, writeStatus } from "../progress.ts";
 import { WorkerPool, type WorkerPoolEventCallbacks } from "./run/pool.ts";
 
 const logger = getLogger("probitas", "cli", "run");
@@ -132,13 +133,18 @@ export async function runCommand(
       ._
       .map(String)
       .map((p) => resolve(cwd, p));
+
+    // Show progress during discovery (only in TTY, suppressed in quiet mode)
+    const discoveryProgress = parsed.quiet ? null : createDiscoveryProgress();
     const scenarioFiles = await discoverScenarioFiles(
       paths.length ? paths : [cwd],
       {
         includes,
         excludes,
+        onProgress: discoveryProgress?.onProgress,
       },
     );
+    discoveryProgress?.complete(scenarioFiles.length);
 
     if (scenarioFiles.length === 0) {
       console.warn("No scenario files found");
@@ -151,12 +157,17 @@ export async function runCommand(
     });
 
     // Load scenarios to get metadata and apply selectors
+    // Show status during loading (only in TTY, suppressed in quiet mode)
+    const clearLoadingStatus = parsed.quiet
+      ? null
+      : writeStatus(`Loading scenarios (${scenarioFiles.length} files)...`);
     let scenarios = await loadScenarios(scenarioFiles, {
       onImportError: (file, err) => {
         const m = err instanceof Error ? err.message : String(err);
         throw new Error(`Failed to load scenario from ${file}: ${m}`);
       },
     });
+    clearLoadingStatus?.();
 
     logger.debug("Scenarios loaded", { scenarioCount: scenarios.length });
 

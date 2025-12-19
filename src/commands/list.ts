@@ -13,6 +13,7 @@ import { loadScenarios } from "@probitas/core/loader";
 import { applySelectors } from "@probitas/core/selector";
 import { EXIT_CODE } from "../constants.ts";
 import { findProbitasConfigFile, loadConfig } from "../config.ts";
+import { createDiscoveryProgress, writeStatus } from "../progress.ts";
 import { readAsset } from "../utils.ts";
 
 const logger = getLogger("probitas", "cli", "list");
@@ -98,13 +99,18 @@ export async function listCommand(
       ._
       .map(String)
       .map((p) => resolve(cwd, p));
+
+    // Show progress during discovery (only in TTY, suppressed in quiet mode)
+    const discoveryProgress = parsed.quiet ? null : createDiscoveryProgress();
     const scenarioFiles = await discoverScenarioFiles(
       paths.length ? paths : [cwd],
       {
         includes,
         excludes,
+        onProgress: discoveryProgress?.onProgress,
       },
     );
+    discoveryProgress?.complete(scenarioFiles.length);
 
     logger.info("Discovered scenario files", {
       count: scenarioFiles.length,
@@ -126,7 +132,11 @@ export async function listCommand(
     }
 
     // Load scenarios
+    // Show status during loading (only in TTY, suppressed in quiet mode)
     logger.info("Loading scenarios", { fileCount: scenarioFiles.length });
+    const clearLoadingStatus = parsed.quiet
+      ? null
+      : writeStatus(`Loading scenarios (${scenarioFiles.length} files)...`);
 
     const scenarios = await loadScenarios(scenarioFiles, {
       onImportError: (file, err) => {
@@ -134,6 +144,7 @@ export async function listCommand(
         throw new Error(`Failed to load scenario from ${file}: ${m}`);
       },
     });
+    clearLoadingStatus?.();
 
     logger.debug("Scenarios loaded", { scenarioCount: scenarios.length });
 
