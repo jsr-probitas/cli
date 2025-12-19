@@ -21,6 +21,9 @@ jobs:
       - run: deno fmt --check
       - run: deno lint
       - run: deno task check
+      - run: |
+          deno task update-lockgit
+          diff --exit-code || echo "deno.lock is out of date. Please run 'deno task update-lock' and commit the changes."
 
   test:
     runs-on: ubuntu-latest
