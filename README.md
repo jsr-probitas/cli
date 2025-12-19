@@ -92,13 +92,22 @@ Execute scenario files and report results.
 **Options:**
 
 - `--select, -s <pattern>` - Filter scenarios by selector (can repeat)
-- `--reporter, -r <type>` - Output format: list, json (default: list)
-- `--concurrency, -c <n>` - Max parallel scenarios (0 = unlimited)
-- `--max-failures, -f <n>` - Stop after N failures (0 = continue all)
-- `--log-level, -l <level>` - Log verbosity: fatal, warning, info, debug
-- `--include <glob>` - Include files matching pattern
-- `--exclude <glob>` - Exclude files matching pattern
-- `--timeout <duration>` - Scenario timeout (e.g., "30s", "5m")
+- `--reporter <type>` - Output format: dot, list, json, tap (default: list)
+- `--max-concurrency <n>` - Max parallel scenarios (0 = unlimited)
+- `--sequential, -S` - Run scenarios sequentially (alias for
+  --max-concurrency=1)
+- `--max-failures <n>` - Stop after N failures (0 = continue all)
+- `--fail-fast, -f` - Stop on first failure (alias for --max-failures=1)
+- `--verbose, -v` - Verbose output (info level logging)
+- `--quiet, -q` - Quiet output (errors only, fatal level logging)
+- `--debug, -d` - Debug output (maximum detail)
+- `--include <glob>` - Include files matching pattern (can repeat)
+- `--exclude <glob>` - Exclude files matching pattern (can repeat)
+- `--timeout <duration>` - Scenario timeout (e.g., "30s", "5m", default: "30s")
+- `--no-timeout` - Disable timeout (alias for --timeout 0)
+- `--config <path>` - Path to config file
+- `--reload, -r` - Reload dependencies before running
+- `--no-color` - Disable colored output
 
 ### `probitas list [paths...] [options]`
 
@@ -106,8 +115,15 @@ List discovered scenarios without running them.
 
 **Options:**
 
-- `--select, -s <pattern>` - Filter scenarios by selector
+- `--select, -s <pattern>` - Filter scenarios by selector (can repeat)
+- `--include <glob>` - Include files matching pattern (can repeat)
+- `--exclude <glob>` - Exclude files matching pattern (can repeat)
 - `--json` - Output as JSON
+- `--config <path>` - Path to config file
+- `--reload, -r` - Reload dependencies before listing
+- `--verbose, -v` - Verbose output
+- `--quiet, -q` - Quiet output
+- `--debug, -d` - Debug output
 
 ### `probitas init [options]`
 
@@ -157,18 +173,29 @@ Selectors filter scenarios by name or tags:
 
 ## Configuration
 
-Create a `probitas.json` file in your project root:
+Create a configuration file in your project root:
 
-```json
+```jsonc
 {
   "includes": ["probitas/**/*.probitas.ts"],
   "excludes": ["**/*.skip.probitas.ts"],
-  "reporter": "list",
+  "reporter": "list", // Options: dot, list, json, tap
   "maxConcurrency": 4,
+  "maxFailures": 0, // 0 = continue all
   "timeout": "30s",
   "selectors": ["!tag:wip"]
 }
 ```
+
+**Supported config file names** (in priority order):
+
+1. `probitas.json`
+2. `probitas.jsonc`
+3. `.probitas.json`
+4. `.probitas.jsonc`
+
+The CLI searches for config files in the current directory and parent
+directories. Configuration values can be overridden by command-line flags.
 
 ## Development
 
