@@ -27,7 +27,8 @@
     "coverage": "deno coverage .coverage --include='src/'",
     "verify": "deno fmt && deno lint && deno task check && deno task test",
     "probitas": "deno run -A --unstable-kv --lock ./deno.lock ./mod.ts",
-    "update-lock": "rm deno.lock && deno cache -r mod.ts jsr:@probitas/probitas jsr:@probitas/probitas@^0",
+    "update-nix-hash": "nix run .#probitas.updateDepsHash",
+    "update-lock": "rm deno.lock && deno cache -r mod.ts jsr:@probitas/probitas jsr:@probitas/probitas@^0 && deno task update-nix-hash",
     "update-version": "deno run -A .scripts/update_version.ts"
   },
   "imports": {
