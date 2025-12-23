@@ -65,7 +65,7 @@
           '';
           outputHashAlgo = "sha256";
           outputHashMode = "recursive";
-          outputHash = "sha256-C8hhpU1YzABTqZ+8IioJHk4prpowjXGLf3REYhDoU1I=";
+          outputHash = "sha256-NEwHv/ogdu8LAuBU4BFmLDfCPgMqXRVmXSafz8bDi7A=";
         };
       in
       {
