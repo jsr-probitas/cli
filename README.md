@@ -109,6 +109,15 @@ probitas run --reporter json
 # List scenarios without running
 probitas list
 
+# Format scenario files
+probitas fmt
+
+# Lint scenario files
+probitas lint
+
+# Type-check scenario files
+probitas check
+
 # Show help
 probitas --help
 ```
@@ -183,6 +192,94 @@ probitas init --force
 
 - `example.probitas.ts` - Example scenario file
 - `probitas.jsonc` - Configuration file
+
+### `probitas fmt [paths...] [options]`
+
+Format scenario files using Deno's formatter.
+
+**Options:**
+
+- `--include <pattern>` - Include pattern for file discovery
+- `--exclude <pattern>` - Exclude pattern for file discovery
+- `--config <path>` - Path to probitas config file
+- `--verbose, -v` - Verbose output
+- `--quiet, -q` - Suppress output
+- `--debug, -d` - Debug output
+
+**Examples:**
+
+```bash
+# Format all scenario files
+probitas fmt
+
+# Format scenarios in specific directory
+probitas fmt api/
+
+# Format with custom pattern
+probitas fmt --include "e2e/**/*.probitas.ts"
+```
+
+**Note:** Runs `deno fmt --no-config` on discovered scenario files. Uses
+includes/excludes from probitas config (same as run/list).
+
+### `probitas lint [paths...] [options]`
+
+Lint scenario files using Deno's linter.
+
+**Options:**
+
+- `--include <pattern>` - Include pattern for file discovery
+- `--exclude <pattern>` - Exclude pattern for file discovery
+- `--config <path>` - Path to probitas config file
+- `--verbose, -v` - Verbose output
+- `--quiet, -q` - Suppress output
+- `--debug, -d` - Debug output
+
+**Examples:**
+
+```bash
+# Lint all scenario files
+probitas lint
+
+# Lint scenarios in specific directory
+probitas lint api/
+
+# Lint with custom pattern
+probitas lint --include "e2e/**/*.probitas.ts"
+```
+
+**Note:** Runs `deno lint --no-config` on discovered scenario files. Uses
+includes/excludes from probitas config (same as run/list). Automatically
+excludes rules: `no-import-prefix`, `no-unversioned-import`.
+
+### `probitas check [paths...] [options]`
+
+Type-check scenario files using Deno's type checker.
+
+**Options:**
+
+- `--include <pattern>` - Include pattern for file discovery
+- `--exclude <pattern>` - Exclude pattern for file discovery
+- `--config <path>` - Path to probitas config file
+- `--verbose, -v` - Verbose output
+- `--quiet, -q` - Suppress output
+- `--debug, -d` - Debug output
+
+**Examples:**
+
+```bash
+# Type-check all scenario files
+probitas check
+
+# Check scenarios in specific directory
+probitas check api/
+
+# Check with custom pattern
+probitas check --include "e2e/**/*.probitas.ts"
+```
+
+**Note:** Runs `deno check --no-config` on discovered scenario files. Uses
+includes/excludes from probitas config (same as run/list).
 
 ## Selectors
 
