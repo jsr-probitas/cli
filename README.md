@@ -145,6 +145,8 @@ Execute scenario files and report results.
 - `--timeout <duration>` - Scenario timeout (e.g., "30s", "5m", default: "30s")
 - `--no-timeout` - Disable timeout (alias for --timeout 0)
 - `--config <path>` - Path to config file
+- `--env <file>` - Load environment variables from file (default: .env)
+- `--no-env` - Skip loading .env file
 - `--reload, -r` - Reload dependencies before running
 - `--no-color` - Disable colored output
 
@@ -159,6 +161,8 @@ List discovered scenarios without running them.
 - `--exclude <glob>` - Exclude files matching pattern (can repeat)
 - `--json` - Output as JSON
 - `--config <path>` - Path to config file
+- `--env <file>` - Load environment variables from file (default: .env)
+- `--no-env` - Skip loading .env file
 - `--reload, -r` - Reload dependencies before listing
 - `--verbose, -v` - Verbose output
 - `--quiet, -q` - Quiet output
