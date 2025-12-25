@@ -9,6 +9,9 @@ import { getLogger } from "@probitas/logger";
 import { JSONReporter, ListReporter } from "@probitas/reporter";
 import type { Reporter } from "@probitas/runner";
 import type { ReporterOptions } from "@probitas/reporter";
+import { load } from "@std/dotenv";
+import { exists } from "@std/fs";
+import { resolve } from "@std/path";
 
 const logger = getLogger("probitas", "cli", "utils");
 
@@ -253,5 +256,71 @@ export async function getVersionInfo(): Promise<VersionInfo | undefined> {
   } catch (err: unknown) {
     logger.debug("Failed to read version info", { err });
     return undefined;
+  }
+}
+
+/**
+ * Load environment variables from a .env file
+ *
+ * @param cwd - Current working directory
+ * @param options - Environment loading options
+ * @returns void
+ *
+ * @example
+ * ```ts
+ * import { loadEnvironment } from "./utils.ts";
+ *
+ * const cwd = Deno.cwd();
+ *
+ * // Load default .env file
+ * await loadEnvironment(cwd);
+ *
+ * // Skip loading .env
+ * await loadEnvironment(cwd, { noEnv: true });
+ *
+ * // Load custom .env file
+ * await loadEnvironment(cwd, { envFile: ".env.test" });
+ * ```
+ */
+export async function loadEnvironment(
+  cwd: string,
+  options?: {
+    /** Skip loading .env file */
+    noEnv?: boolean;
+    /** Custom .env file path (relative to cwd or absolute) */
+    envFile?: string;
+  },
+): Promise<void> {
+  const { noEnv = false, envFile } = options ?? {};
+
+  // Skip if --no-env is specified
+  if (noEnv) {
+    logger.debug("Environment loading disabled via --no-env");
+    return;
+  }
+
+  // Determine which file to load
+  const targetFile = envFile ?? ".env";
+  const targetPath = resolve(cwd, targetFile);
+
+  // Check if file exists
+  if (!(await exists(targetPath))) {
+    logger.debug("Environment file not found", { path: targetPath });
+    return;
+  }
+
+  // Load environment variables
+  try {
+    const env = await load({ envPath: targetPath, export: true });
+    logger.debug("Environment loaded", {
+      path: targetPath,
+      keys: Object.keys(env),
+    });
+  } catch (err: unknown) {
+    // Log error but don't fail - missing .env is acceptable
+    logger.debug("Failed to load environment file", {
+      path: targetPath,
+      error: err,
+    });
   }
 }

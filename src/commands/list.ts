@@ -14,7 +14,7 @@ import { applySelectors } from "@probitas/core/selector";
 import { EXIT_CODE } from "../constants.ts";
 import { findProbitasConfigFile, loadConfig } from "../config.ts";
 import { createDiscoveryProgress, writeStatus } from "../progress.ts";
-import { readAsset } from "../utils.ts";
+import { loadEnvironment, readAsset } from "../utils.ts";
 
 const logger = getLogger("probitas", "cli", "list");
 
@@ -34,8 +34,16 @@ export async function listCommand(
   try {
     // Parse command-line arguments
     const parsed = parseArgs(args, {
-      string: ["config", "include", "exclude", "selector"],
-      boolean: ["help", "json", "reload", "quiet", "verbose", "debug"],
+      string: ["config", "include", "exclude", "selector", "env"],
+      boolean: [
+        "help",
+        "json",
+        "no-env",
+        "reload",
+        "quiet",
+        "verbose",
+        "debug",
+      ],
       collect: ["include", "exclude", "selector"],
       alias: {
         h: "help",
@@ -84,6 +92,13 @@ export async function listCommand(
     } catch {
       // Silently ignore logging configuration errors (e.g., in test environments)
     }
+
+    // Load environment variables before loading configuration
+    // This allows config files to reference environment variables
+    await loadEnvironment(cwd, {
+      noEnv: parsed["no-env"],
+      envFile: parsed.env,
+    });
 
     // Load configuration
     const configPath = parsed.config ??

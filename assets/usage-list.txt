@@ -14,6 +14,8 @@ Options:
                              Supports ! prefix for negation
   --json                     Output in JSON format
   --config <path>            Path to config file (deno.json/deno.jsonc)
+  --env <file>               Load environment variables from file (default: .env)
+  --no-env                   Skip loading .env file
   -r, --reload               Reload dependencies before running
 
 Selector Format:
@@ -66,6 +68,12 @@ Examples:
   probitas list --json                          Output as JSON
   probitas list --reload                        Reload dependencies before listing
 
+  # Environment variables
+  probitas list                                 Load .env file automatically
+  probitas list --env .env.test                 Load custom env file
+  probitas list --no-env                        Skip loading .env file
+
 Note: Uses patterns from config file or defaults to "**/*.probitas.ts"
+      .env file is automatically loaded before scenario listing (use --no-env to skip)
 
 Documentation: https://jsr-probitas.github.io/documents/

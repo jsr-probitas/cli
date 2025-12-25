@@ -22,6 +22,8 @@ Options:
   --max-failures <n>        Stop after N failures
   -f, --fail-fast           Stop on first failure (alias for --max-failures=1)
   --config <path>           Path to config file (deno.json/deno.jsonc)
+  --env <file>              Load environment variables from file (default: .env)
+  --no-env                  Skip loading .env file
   -r, --reload              Reload dependencies before running
   -q, --quiet               Quiet output (errors only)
   -v, --verbose             Verbose output
@@ -96,7 +98,13 @@ Examples:
   probitas run -d                           Debug output
   probitas run --debug                      Debug output (same as -d)
 
+  # Environment variables
+  probitas run                              Load .env file automatically
+  probitas run --env .env.test              Load custom env file
+  probitas run --no-env                     Skip loading .env file
+
 Environment Variables:
   NO_COLOR         Disable colored output
+  .env File:       Automatically loaded before scenario execution (use --no-env to skip)
 
 Documentation: https://jsr-probitas.github.io/documents/

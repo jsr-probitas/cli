@@ -21,6 +21,7 @@ import {
   toScenarioMetadata,
 } from "@probitas/runner";
 import {
+  loadEnvironment,
   parsePositiveInteger,
   parseTimeout,
   readAsset,
@@ -56,11 +57,13 @@ export async function runCommand(
         "exclude",
         "selector",
         "timeout",
+        "env",
       ],
       boolean: [
         "help",
         "no-color",
         "no-timeout",
+        "no-env",
         "reload",
         "quiet",
         "verbose",
@@ -118,6 +121,13 @@ export async function runCommand(
     } catch {
       // Silently ignore logging configuration errors (e.g., in test environments)
     }
+
+    // Load environment variables before loading configuration
+    // This allows config files to reference environment variables
+    await loadEnvironment(cwd, {
+      noEnv: parsed["no-env"],
+      envFile: parsed.env,
+    });
 
     // Load configuration
     const configPath = parsed.config ??
