@@ -12,13 +12,19 @@
       overlay = final: prev: {
         probitas = prev.writeShellApplication {
           name = "probitas";
-          runtimeInputs = [ prev.deno ];
+          runtimeInputs = [ prev.deno prev.coreutils ];
           text = ''
             export DENO_NO_UPDATE_CHECK=1
+
+            # Copy lock file to writable location to avoid /nix/store read-only errors
+            TEMP_LOCK=$(mktemp)
+            cp ${self}/deno.lock "$TEMP_LOCK"
+            trap 'rm -f "$TEMP_LOCK"' EXIT
+
             exec deno run -A \
               --unstable-kv \
               --config=${self}/deno.json \
-              --frozen --lock=${self}/deno.lock \
+              --lock="$TEMP_LOCK" \
               ${self}/mod.ts "$@"
           '';
         };
