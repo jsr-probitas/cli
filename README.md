@@ -1,12 +1,12 @@
 # Probitas CLI
 
 [![JSR](https://jsr.io/badges/@probitas/cli)](https://jsr.io/@probitas/cli)
-[![Test](https://github.com/jsr-probitas/cli/actions/workflows/test.yml/badge.svg)](https://github.com/jsr-probitas/cli/actions/workflows/test.yml)
-[![Publish](https://github.com/jsr-probitas/cli/actions/workflows/publish.yml/badge.svg)](https://github.com/jsr-probitas/cli/actions/workflows/publish.yml)
-[![codecov](https://codecov.io/gh/jsr-probitas/cli/graph/badge.svg)](https://codecov.io/gh/jsr-probitas/cli)
+[![Test](https://github.com/probitas-test/cli/actions/workflows/test.yml/badge.svg)](https://github.com/probitas-test/cli/actions/workflows/test.yml)
+[![Publish](https://github.com/probitas-test/cli/actions/workflows/publish.yml/badge.svg)](https://github.com/probitas-test/cli/actions/workflows/publish.yml)
+[![codecov](https://codecov.io/gh/probitas-test/cli/graph/badge.svg)](https://codecov.io/gh/probitas-test/cli)
 
 Command-line interface for
-[Probitas](https://github.com/jsr-probitas/probitas) - a scenario-based testing
+[Probitas](https://github.com/probitas-test/probitas) - a scenario-based testing
 & workflow execution framework.
 
 ## Installation
@@ -16,7 +16,7 @@ Command-line interface for
 Requires [Deno](https://deno.land/) v2.x or later.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/jsr-probitas/cli/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/probitas-test/cli/main/install.sh | sh
 ```
 
 **Environment variables:**
@@ -28,21 +28,21 @@ curl -fsSL https://raw.githubusercontent.com/jsr-probitas/cli/main/install.sh | 
 
 ```bash
 # Install specific version
-curl -fsSL https://raw.githubusercontent.com/jsr-probitas/cli/main/install.sh | PROBITAS_VERSION=0.1.0 sh
+curl -fsSL https://raw.githubusercontent.com/probitas-test/cli/main/install.sh | PROBITAS_VERSION=0.1.0 sh
 
 # Install to custom directory
-curl -fsSL https://raw.githubusercontent.com/jsr-probitas/cli/main/install.sh | PROBITAS_INSTALL_DIR=/usr/local sh
+curl -fsSL https://raw.githubusercontent.com/probitas-test/cli/main/install.sh | PROBITAS_INSTALL_DIR=/usr/local sh
 ```
 
 ### Using Homebrew (macOS/Linux)
 
 ```bash
 # Add the tap and install
-brew tap jsr-probitas/tap
+brew tap probitas-test/tap
 brew install probitas
 
 # Or install directly
-brew install jsr-probitas/tap/probitas
+brew install probitas-test/tap/probitas
 ```
 
 Deno is installed automatically as a dependency.
@@ -53,10 +53,10 @@ With [Nix](https://nixos.org/) and flakes enabled:
 
 ```bash
 # Run directly without installing
-nix run github:jsr-probitas/cli
+nix run github:probitas-test/cli
 
 # Install to profile
-nix profile install github:jsr-probitas/cli
+nix profile install github:probitas-test/cli
 ```
 
 **Use in a flake (recommended):**
@@ -65,7 +65,7 @@ nix profile install github:jsr-probitas/cli
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    probitas.url = "github:jsr-probitas/cli";
+    probitas.url = "github:probitas-test/cli";
   };
 
   outputs = { nixpkgs, probitas, ... }:

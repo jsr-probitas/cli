@@ -12,7 +12,7 @@
  * - Basic and Bearer authentication
  *
  * Target: echo-http service on port 18080 (compose.yaml)
- * API Reference: https://github.com/jsr-probitas/echo-servers/blob/main/echo-http/docs/api.md
+ * API Reference: https://github.com/probitas-test/echo-servers/blob/main/echo-http/docs/api.md
  */
 import { client, expect, scenario, Skip } from "jsr:@probitas/probitas@^0";
 

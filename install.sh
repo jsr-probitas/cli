@@ -2,8 +2,8 @@
 # Install script for @probitas/cli
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/jsr-probitas/cli/main/install.sh | sh
-#   curl -fsSL https://raw.githubusercontent.com/jsr-probitas/cli/main/install.sh | PROBITAS_VERSION=0.1.0 sh
+#   curl -fsSL https://raw.githubusercontent.com/probitas-test/cli/main/install.sh | sh
+#   curl -fsSL https://raw.githubusercontent.com/probitas-test/cli/main/install.sh | PROBITAS_VERSION=0.1.0 sh
 #
 # Environment variables:
 #   PROBITAS_VERSION      Specify the version to install (default: latest)

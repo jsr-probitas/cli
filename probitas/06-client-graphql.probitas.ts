@@ -2,7 +2,7 @@
  * GraphQL Client Scenario Example
  *
  * Target: echo-graphql service on port 14000 (compose.yaml)
- * API Reference: https://github.com/jsr-probitas/echo-servers/blob/main/echo-graphql/docs/api.md
+ * API Reference: https://github.com/probitas-test/echo-servers/blob/main/echo-graphql/docs/api.md
  */
 import {
   client,

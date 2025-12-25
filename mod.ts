@@ -7,7 +7,7 @@
  *
  * ## Links
  *
- * - [GitHub Repository](https://github.com/jsr-probitas/probitas)
+ * - [GitHub Repository](https://github.com/probitas-test/probitas)
  * - [@probitas/probitas](https://jsr.io/@probitas/probitas) - Main package for writing scenarios
  *
  * ## Related Packages

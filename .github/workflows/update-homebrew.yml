@@ -20,6 +20,6 @@ jobs:
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.HOMEBREW_TAP_TOKEN }}
-          repository: jsr-probitas/homebrew-tap
+          repository: probitas-test/homebrew-tap
           event-type: update-formula
           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'

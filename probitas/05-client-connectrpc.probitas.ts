@@ -2,7 +2,7 @@
  * ConnectRPC Client Scenario Example
  *
  * Target: echo-connectrpc service on port 18082 (compose.yaml)
- * API Reference: https://github.com/jsr-probitas/echo-servers/blob/main/echo-connectrpc/docs/api.md
+ * API Reference: https://github.com/probitas-test/echo-servers/blob/main/echo-connectrpc/docs/api.md
  */
 import { client, expect, scenario, Skip } from "jsr:@probitas/probitas@^0";
 
