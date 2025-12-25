@@ -12,9 +12,23 @@
       overlay = final: prev: {
         probitas = prev.writeShellApplication {
           name = "probitas";
-          runtimeInputs = [ prev.deno prev.coreutils ];
+          runtimeInputs = [
+            prev.deno
+            prev.coreutils
+            # Native library dependencies for database clients
+            prev.stdenv.cc.cc.lib
+            prev.sqlite
+            prev.duckdb
+          ];
           text = ''
             export DENO_NO_UPDATE_CHECK=1
+
+            # Add native library paths for database clients (FFI support)
+            export LD_LIBRARY_PATH="${prev.lib.makeLibraryPath [
+              prev.stdenv.cc.cc.lib
+              prev.sqlite
+              prev.duckdb
+            ]}''${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 
             # Copy lock file to writable location to avoid /nix/store read-only errors
             TEMP_LOCK=$(mktemp)
