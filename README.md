@@ -1,3 +1,9 @@
+# ⚠️ DEPRECATED
+
+Merged into https://github.com/probitas-test/probitas
+
+---
+
 # Probitas CLI
 
 [![JSR](https://jsr.io/badges/@probitas/cli)](https://jsr.io/@probitas/cli)
